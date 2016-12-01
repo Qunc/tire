@@ -1,0 +1,47 @@
+body,html,ul,ol,dl,dt,dd,p,div{margin:0;padding: 0;}
+html,body{
+	font-size: 62.5%;
+	color:#333;
+	font-family: PingFang SC Medium;
+	overflow-x: hidden;
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+ul{list-style: none;}
+a{
+	text-decoration: none;
+	color: #333;
+}
+.pf_re{font-family: PingFang SC Regular;}
+.pf_bo{font-family: PingFang SC Bold; font-weight: bold;}
+.pf_he{font-family: PingFang SC Heavy;}
+.ar{font-family: arial;}
+
+/*//////首页////////*/
+.tire_bg{
+	
+}
+.tire_bg img{
+	width: 72.27%;
+	height: 36.6rem;
+	padding: 2.8rem 13.865% 0;
+}
+.details{
+	width: 100%;
+	height: 9.8rem;
+	box-sizing: border-box;
+	padding: 0 1.5rem;
+	margin-top: 5.5rem;
+	background: yellow;
+}
+.bottom_OrderNow{
+	position: absolute;bottom:0;
+	width: 100%;
+	height: 6rem;
+	background: #24c789;
+	color: #fff;
+	font-size: 2.1rem;
+	text-align: center;
+	line-height: 6rem;
+}
