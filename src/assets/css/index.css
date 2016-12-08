@@ -78,6 +78,11 @@ a{
 	border-bottom: 1px solid #ccc;
 	position: relative;
 }
+.header_title .SelectShop_Back{
+	width:8%;
+	height:100%;
+	position: absolute;
+}
 .header_title img{
 	width: 10px;
 	height: 17px;
@@ -151,23 +156,25 @@ section .shop p.address{
 	width: 100%;
 }
 .contact_PhoneNum.WidthHack input{
-	width: 68%;
-	margin-right: 0;
+	width: 64%;
+	margin-right: -0.5rem;
+	border-right: 0;
 }
 .contact_PhoneNum .SendIdentCode{
 	width: 22%;
 	height: 5rem;
 	background: #24c789;
-	color:#fff;
 	font-size: 1.3rem;
 	box-sizing: border-box;
 	padding: 2rem 3.47%;
 	display: inline;
-	margin-left: -6%;
 	border-top:1px solid #ccc;
 	-moz-user-select: none; /*火狐*/
 	-webkit-user-select: none; /*webkit*/
 	user-select: none;
+}
+.contact_PhoneNum .SendIdentCode a{
+	color:#fff;
 }
 /*placehold*/
 .contact_name input::-webkit-input-placeholder,.contact_PhoneNum input::-webkit-input-placeholder,.IdentCode input::-webkit-input-placeholder{ /* WebKit browsers */ 
@@ -297,4 +304,7 @@ section .shop p.address{
 .ProductName.WidthHack{
 	font-size: 1.5rem;
 	width: 26rem;
+}
+.bottom_OrderNow.ServerOver_LetterHack{
+	background: #b9b9b9;
 }
