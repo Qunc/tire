@@ -66,7 +66,7 @@ module.exports = {
 				_id = res.body[0]._id; 
             }, function (res) {});
             
-			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, {contacts:contacts, contacts_phone:13606625986, service_shop_id:_id,verify_code:5295}).then(function (res) {
+			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, {contacts:contacts, contacts_phone:11111111111, service_shop_id:_id,verify_code:1111}).then(function (res) {
 
 				this.$http.get(API_BASE_URL + '/order/'+res.body.order_id+'?token='+localStorage.token).then(function (res) {
 					

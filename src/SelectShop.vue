@@ -5,11 +5,11 @@
 		</header>
 		<section>
 			<router-link :to="{path:'/contact'}">
-			<div class="shop" v-on:click="" v-for="">
-				<p class="name">南山区俊红轮胎店</p>
-				<p class="extent">270m</p>
-				<p class="address">地址:南光路53-1号</p>
-			</div>
+				<div class="shop" v-for="item in SelectShop_Data">
+					<p class="name">{{item.name}}</p>
+					<p class="extent">270m</p>
+					<p class="address">{{item.address}}</p>
+				</div>
 			</router-link>
 		</section>
 	</div>
@@ -18,7 +18,7 @@
 module.exports = {
 	data: function () {
         return {
-            SelectShop_Data: []
+            SelectShop_Data: {}
         }
     },
 	created: function(){
@@ -33,10 +33,8 @@ module.exports = {
 //		},
 		fetchData: function(){
             this.$http.get(API_BASE_URL + '/shop?token='+localStorage.token).then(function (res) {
-            	console.log(res.data[0]);
-            	this.SelectShop_Data = res.data[0];
-//          	this.billings.shop_id = res.data[0]._id;
-//          	this.billings.contacts = res.data[0].contacts;
+            	
+            	this.SelectShop_Data = res.data;
             	
             }, function (res) {});
 		}
