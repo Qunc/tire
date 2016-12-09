@@ -14,7 +14,7 @@
 				<input type="text" v-model="contacts" placeholder="输入您的姓名"/>
 			</div>
 			<div class="contact_PhoneNum WidthHack">
-				<input type="number" v-model="PhoneNumber" placeholder="输入您的电话号码"/>
+				<input type="text" v-model="PhoneNumber" placeholder="输入您的电话号码"/>
 				<div class="SendIdentCode" v-on:click="SendOver">
 					<a>发送验证码</a>
 				</div>
