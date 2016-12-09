@@ -40,9 +40,17 @@
 
 <script>
 module.exports = {
+	created: function(){
+		this.fetchData();
+	},
 	methods: {
 		shop_details_back: function(){
 			this.$router.push('/user_details');
+		},
+		fetchData: function(){
+			this.$http.get(API_BASE_URL + '/order?token='+localStorage.token).then(function (res) {
+            	console.log(res);
+            }, function (res) {});	
 		}
 	}
 }

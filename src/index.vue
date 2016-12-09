@@ -33,7 +33,7 @@ module.exports = {
             	console.log(res.body.wechatOauthUrl);
             }, function (res) {});
             
-            this.$http.get(API_BASE_URL + '/auth/view?token='+localStorage.token).then(function (res) {
+            this.$http.get(API_BASE_URL + '/auth?token='+localStorage.token).then(function (res) {
             	console.log(res);
             }, function (res) {});
             

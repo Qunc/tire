@@ -57,9 +57,23 @@ module.exports = {
 			this.$router.push('/shop_details');
 		},
 		fetchData: function(){
-			this.$http.get(API_BASE_URL + '/order?token='+localStorage.token).then(function (res) {
-            	console.log(res);
+//			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, {contacts:contacts, contacts_phone:13606625986, service_shop_id:_id,verify_code:5295}).then(function (res) {
+//          }, function (res) {});
+//          
+
+			this.$http.get(API_BASE_URL + '/shop?token='+localStorage.token).then(function (res) {
+				contacts = res.body[0].contacts;
+				_id = res.body[0]._id; 
             }, function (res) {});
+            
+			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, {contacts:contacts, contacts_phone:13606625986, service_shop_id:_id,verify_code:5295}).then(function (res) {
+
+				this.$http.get(API_BASE_URL + '/order/'+res.body.order_id+'?token='+localStorage.token).then(function (res) {
+					
+    	   	    }, function (res) {});
+				
+            }, function (res) {});  
+            
 		}
 		
 	}

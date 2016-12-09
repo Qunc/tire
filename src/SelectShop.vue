@@ -4,7 +4,7 @@
 			<div class="SelectShop_Back" v-on:click="SelectShop_back"><img src="./assets/img/left.png"/></div><span>选择门店</span>
 		</header>
 		<section>
-			<router-link :to="{path:'/contact/'+billings.shop_id}">
+			<router-link :to="{path:'/contact'}">
 			<div class="shop" v-on:click="" v-for="">
 				<p class="name">南山区俊红轮胎店</p>
 				<p class="extent">270m</p>
@@ -18,7 +18,7 @@
 module.exports = {
 	data: function () {
         return {
-            billings: []
+            SelectShop_Data: []
         }
     },
 	created: function(){
@@ -33,11 +33,10 @@ module.exports = {
 //		},
 		fetchData: function(){
             this.$http.get(API_BASE_URL + '/shop?token='+localStorage.token).then(function (res) {
-            	console.log(res.data);
-            	console.log(this);
-            	this.billings.shop_id = res.data[0]._id;
-            	this.billings.contacts = res.data[0].contacts;
-		console.log(this.billings.shop_id +'+'+this.billings.contacts);
+            	console.log(res.data[0]);
+            	this.SelectShop_Data = res.data[0];
+//          	this.billings.shop_id = res.data[0]._id;
+//          	this.billings.contacts = res.data[0].contacts;
             	
             }, function (res) {});
 		}

@@ -10,7 +10,7 @@ var shop_details = require('./shop_details.vue');
 var user_details = require('./user_details.vue');
 
 //先设置一个token
-localStorage.setItem('token','5848c7872e9ffc2f3413f824');
+localStorage.setItem('token','58493a692e9ffc27a73dc024');
 //如果url有token，就从url获取token
 var getQueryParam = function (paras) {
     var url = location.href;
@@ -48,7 +48,7 @@ const router = new VueRouter({
     routes: [
         {path: '/', component: index },
         {path: '/SelectShop', component: SelectShop },
-        {path: '/contact/billings.shop_id', component: contact },
+        {path: '/contact', component: contact },
         {path:'/user_details',component: user_details },
         {path:'/shop_details',component: shop_details }
     ]
