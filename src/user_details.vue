@@ -46,13 +46,22 @@
 
 <script>
 module.exports = {
+	created: function () {
+		this.fetchData();
+	},
 	methods: {
 		userdetails_back: function(){
 			this.$router.push('/contact');
 		},
 		go_shopdetails: function(){
 			this.$router.push('/shop_details');
+		},
+		fetchData: function(){
+			this.$http.get(API_BASE_URL + '/order?token='+localStorage.token).then(function (res) {
+            	console.log(res);
+            }, function (res) {});
 		}
+		
 	}
 }
 </script>

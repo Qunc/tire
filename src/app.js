@@ -48,7 +48,7 @@ const router = new VueRouter({
     routes: [
         {path: '/', component: index },
         {path: '/SelectShop', component: SelectShop },
-        {path: '/contact', component: contact },
+        {path: '/contact/billings.shop_id', component: contact },
         {path:'/user_details',component: user_details },
         {path:'/shop_details',component: shop_details }
     ]
@@ -63,3 +63,4 @@ new Vue({
     router: router
     //props: ['order_success']
 }).$mount('#app');
+

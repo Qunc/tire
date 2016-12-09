@@ -38,11 +38,17 @@ module.exports = {
 			this.$router.push('/SelectShop');
 		},
 		go_userdetails: function(){
-			this.$router.push('/user_details');
+//			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token/*, {contacts, contacts_phone, service_shop_id,verify_code}*/).then(function (res) {
+//          	console.log(res);
+//          }, function (res) {});
+//          
+			console.log($route.params.shop_id);
+            this.$router.push('/user_details');
 		},
 		SendOver: function(){
 			console.log(this);
 		}
+		
 	}
 }
 </script>
