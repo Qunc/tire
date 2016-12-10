@@ -173,6 +173,9 @@ section .shop p.address{
 	-webkit-user-select: none; /*webkit*/
 	user-select: none;
 }
+.SendIdentCode.WidthHack{
+	padding: 2rem 2.6%;
+}
 .contact_PhoneNum .SendIdentCode a{
 	color:#fff;
 }

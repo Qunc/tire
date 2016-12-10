@@ -18,6 +18,10 @@
 				<div class="SendIdentCode" v-on:click="SendOver">
 					<a>发送验证码</a>
 				</div>
+				<!--<div class="SendIdentCode" v-on:click="SendOver">
+					<a>发送验证码</a>
+				</div>-->
+				<!-- JS控制,秒数为个位数时,padding:2rem 2.6%; -->
 			</div>
 			<div class="IdentCode">
 				<input type="text" v-model="verify_code" placeholder="输入验证码"/>

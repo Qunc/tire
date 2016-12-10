@@ -41,6 +41,12 @@
 				</div>
 			</div>
 		</section>
+		<footer>
+			<!--<img src="./assets/img/wx_loader.gif"/> -->
+			<div class="bottom_OrderNow">
+				立即支付
+			</div>
+		</footer>
 	</div>
 </template>
 
