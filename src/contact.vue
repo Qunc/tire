@@ -4,7 +4,7 @@
 			<div class="SelectShop_Back" v-on:click="contact_back">
 				<img src="./assets/img/left.png"/>
 			</div>
-			<span>南山区俊红轮胎店</span>
+			<span>{{shop.name}}</span>
 		</header>
 		<section>
 			<div class="contact">

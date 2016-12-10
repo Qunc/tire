@@ -6,7 +6,7 @@
 		<section>
 
 			<div class="shop" v-for="item in SelectShop_Data">
-				<router-link :to="{path:'/contact', params: {shop_id: item._id}}">
+				<router-link :to="{path:'/contact/' + item._id}">
 					<p class="name">{{item.name}}</p>
 					<p class="extent"></p>
 					<p class="address">{{item.address}}</p>
