@@ -25,6 +25,7 @@ module.exports = {
     },
 	created: function(){
 		this.fetchData();
+        document.getElementsByTagName("body")[0].setAttribute("style","background-color:#ebebeb");
 		//转菊花
 	},
 	methods: {

@@ -39,6 +39,8 @@ a{
 .details p.name{
 	font-size: 1.5rem;
 	color: #666;
+	font-family: arial;
+	letter-spacing: 0.8px;
 }
 .details p.tips{
 	font-size:1.3rem;

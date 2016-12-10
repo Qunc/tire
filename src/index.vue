@@ -1,5 +1,7 @@
 <template>
+	
     <div>
+    	
 		<section>
 			<div class="tire_bg">
 				<img src="./assets/img/tire.png"/>
@@ -20,7 +22,7 @@
 <script>
 module.exports = {
 	created: function () {
-//      document.getElementsByTagName("body")[0].setAttribute("style","background-color:yellow");
+        document.getElementsByTagName("body")[0].setAttribute("style","background-color:#fff");
 		//this.fetchData();
     },
 	methods: {
