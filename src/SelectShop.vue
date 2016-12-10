@@ -4,13 +4,15 @@
 			<div class="SelectShop_Back" v-on:click="SelectShop_back"><img src="./assets/img/left.png"/></div><span>选择门店</span>
 		</header>
 		<section>
-			<router-link :to="{path:'/contact'}">
-				<div class="shop" v-for="item in SelectShop_Data">
+
+			<div class="shop" v-for="item in SelectShop_Data">
+				<router-link :to="{path:'/contact', params: {shop_id: item._id}}">
 					<p class="name">{{item.name}}</p>
-					<p class="extent">270m</p>
+					<p class="extent"></p>
 					<p class="address">{{item.address}}</p>
-				</div>
-			</router-link>
+				</router-link>
+			</div>
+
 		</section>
 	</div>
 </template>
@@ -23,6 +25,7 @@ module.exports = {
     },
 	created: function(){
 		this.fetchData();
+		//转菊花
 	},
 	methods: {
 		SelectShop_back: function(){

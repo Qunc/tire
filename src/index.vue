@@ -21,22 +21,14 @@
 module.exports = {
 	created: function () {
 //      document.getElementsByTagName("body")[0].setAttribute("style","background-color:yellow");
-		this.fetchData();
+		//this.fetchData();
     },
 	methods: {
         OrderNow: function () {
             this.$router.push('/SelectShop');
         },
         fetchData: function () {
-        	console.log(API_BASE_URL);
-            this.$http.get(API_BASE_URL + '/init').then(function (res) {
-            	console.log(res.body.wechatOauthUrl);
-            }, function (res) {});
-            
-            this.$http.get(API_BASE_URL + '/auth?token='+localStorage.token).then(function (res) {
-            	console.log(res);
-            }, function (res) {});
-            
+
         }
     }
 }

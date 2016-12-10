@@ -14,7 +14,7 @@
 				<input type="text" v-model="contacts" placeholder="输入您的姓名"/>
 			</div>
 			<div class="contact_PhoneNum WidthHack">
-				<input type="text" v-model="PhoneNumber" placeholder="输入您的电话号码"/>
+				<input type="text" v-model="contacts_phone" placeholder="输入您的电话号码"/>
 				<div class="SendIdentCode" v-on:click="SendOver">
 					<a>发送验证码</a>
 				</div>
@@ -36,8 +36,9 @@ module.exports = {
 	data: function () {
         return {
         	contacts:'',
-        	PhoneNumber:'',
-            verify_code:''
+        	contacts_phone:'',
+            verify_code:'',
+			shop: {},
         }
     },
 	created: function(){
@@ -48,25 +49,23 @@ module.exports = {
 			this.$router.push('/SelectShop');
 		},
 		go_userdetails: function(){
-			
-			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, {contacts:this.contacts, contacts_phone:this.PhoneNumber, service_shop_id:_id,verify_code:this.verify_code}).then(function (res) {
-            
-            	console.log(_id);
-                this.$http.post(API_BASE_URL + '/pay?token='+localStorage.token, {order_id:res.body.order_id}).then(function (res) {
-            		
-    	   		}, function (res) {});
-            	
+			var data = {
+				contacts: this.contacts,
+				contacts_phone: this.contacts_phone,
+				service_shop_id:_id,
+				verify_code:this.verify_code
+			};
+			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, data).then(function (res) {
+				//跳转到订单详情页
+				this.$router.push('/user_details/' + res.order_id);
             }, function (res) {});
-            
-           
-
-            this.$router.push('/user_details');
 		},
 		fetchData: function(){
-			 this.$http.get(API_BASE_URL + '/shop?token='+localStorage.token).then(function (res) {
+			 this.$http.get(API_BASE_URL + '/shop/' + this.$route.params.shop_id + '?token='+localStorage.token).then(function (res) {
 //          	this.billings.shop_id = res.data[0]._id;
 //          	this.billings.contacts = res.data[0].contacts;
-				_id = res.body[0]._id; 
+				//_id = res.body[0]._id;
+				 this.shop = res;
             }, function (res) {});
             
 		},

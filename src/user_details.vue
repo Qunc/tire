@@ -7,29 +7,29 @@
 			<span>订单详情</span>
 		</header>
 		<section>
-			<div class="user_details_shop" v-on:click="go_shopdetails">
+			<div class="user_details_shop">
 				<div class="AddressIcon">
 					<img src="./assets/img/address.png"/>
 				</div>
 				<p class="ShopName">
-					南山区俊红轮胎店
+					{{shop.name}}
 				</p>
 				<p class="ShopPhoneNumber">
-					13815634853
+					{{shop.contacts_phone}}
 				</p>
 				<p class="ShopContact">
-					<span>联系人：</span>陈先生
+					<span>联系人：</span>{{shop.contacts}}
 				</p>
 				<p class="ShopAddress">
-					<span>门店地址：</span>南海大道西海岸大厦3楼3K室
+					<span>门店地址：</span>{{shop.address}}
 				</p>
 			</div>
 			<div class="CarOwner">
 				<div class="CarOwnerName">
-					车主信息：刘军
+					车主信息：{{order.contacts}}
 				</div>
 				<div class="CarOwnerPhone">
-					15935642358
+					{{order.contacts_phone}}
 				</div>
 			</div>
 			<div class="user_details_indent">
@@ -37,7 +37,7 @@
 					经典轮胎 205/55R16 PRIMACY 3ST浩悦91W
 				</div>
 				<div class="ProductPrice">
-					&yen; 225
+					&yen; {{order.amount / 100}}
 				</div>
 			</div>
 		</section>
@@ -46,34 +46,40 @@
 
 <script>
 module.exports = {
+	data: function () {
+		return {
+			order: {},
+			shop: {}
+		}
+	},
 	created: function () {
 		this.fetchData();
 	},
 	methods: {
 		userdetails_back: function(){
-			this.$router.push('/contact');
+			this.$router.push('/');
 		},
-		go_shopdetails: function(){
-			this.$router.push('/shop_details');
-		},
+
 		fetchData: function(){
-//			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, {contacts:contacts, contacts_phone:13606625986, service_shop_id:_id,verify_code:5295}).then(function (res) {
-//          }, function (res) {});
-//          
-
-			this.$http.get(API_BASE_URL + '/shop?token='+localStorage.token).then(function (res) {
-				contacts = res.body[0].contacts;
-				_id = res.body[0]._id; 
+			this.$http.get(API_BASE_URL + '/order/' + this.$route.params.order_id + '?token='+localStorage.token).then(function (res) {
+				if (res.code != 0) {
+					return;
+				}
+				this.order = res;
+				this.shop = res.shop;
             }, function (res) {});
-            
-			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, {contacts:contacts, contacts_phone:11111111111, service_shop_id:_id,verify_code:1111}).then(function (res) {
+		},
 
-				this.$http.get(API_BASE_URL + '/order/'+res.body.order_id+'?token='+localStorage.token).then(function (res) {
-					
-    	   	    }, function (res) {});
-				
-            }, function (res) {});  
-            
+		wxpay: function() {
+			this.$http.post(API_BASE_URL + '/order?token=' + localStorage.token, {order_id: order.order_id}).then(function (res) {
+				WeixinJSBridge.invoke('getBrandWCPayRequest', res.package, function(res){
+					// 使用以上方式判断前端返回,微信团队郑重提示：
+					// res.err_msg将在用户支付成功后返回 ok，但并不保证它绝对可靠
+					if(res.err_msg == "get_brand_wcpay_request：ok" ) {
+
+					}
+				});
+			})
 		}
 		
 	}
