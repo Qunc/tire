@@ -27,7 +27,7 @@ var getQueryParam = function (paras) {
 }
 
 //先设置一个token
-localStorage.setItem('token','58493a692e9ffc27a73dc024');
+//localStorage.setItem('token','58493a692e9ffc27a73dc024');
 
 //检查是否保存有token
 var token = localStorage.getItem('token');
@@ -35,18 +35,17 @@ var code = getQueryParam('code');
 
 //做一些初始化动作
 Vue.http.get(API_BASE_URL + '/init').then(function (res) {
-    if (res.code == 0) {
+    if (res.body.err_code == 0) {
         //wx.config
-        wx && wx.config(res.jsConfig)
+        wx && wx.config(res.js_config)
     }
 })
 
 var gotoWechatOauth = function () {
     //获取微信授权地址，跳转微信授权
     Vue.http.get(API_BASE_URL + '/auth/url').then(function (res) {
-        if (res.wechatOauthUrl) {
-            console.log('togo wechat')
-            window.location.href = res.wechatOauthUrl;
+        if (res.body.wechatOauthUrl) {
+            window.location.href = res.body.wechatOauthUrl;
         }
     })
 }
@@ -57,7 +56,7 @@ if (!token) {
     //否则就跳转到微信授权
     if (!!code) {
         Vue.http.post(API_BASE_URL + '/auth', {code: code}).then(function(res){
-            localStorage.setItem('token', res.token)
+            localStorage.setItem('token', res.body.token)
         }, function (err) {})
     } else {
         gotoWechatOauth();
@@ -65,7 +64,7 @@ if (!token) {
 } else {
     //检验token是否有效
     Vue.http.get(API_BASE_URL + '/auth?token=' + token).then(function(res){
-        if (res._id) {
+        if (!res.body._id) {
             gotoWechatOauth();
         }
     }, function (err) {
@@ -98,6 +97,5 @@ const router = new VueRouter({
 
 new Vue({
     router: router
-    //props: ['order_success']
 }).$mount('#app');
 

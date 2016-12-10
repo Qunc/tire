@@ -34,10 +34,13 @@ a{
 	box-sizing: border-box;
 	padding: 0 4%;
 	margin-top: 5.5rem;
+	margin-bottom: 6rem;
 }
 .details p.name{
 	font-size: 1.5rem;
 	color: #666;
+	font-family: arial;
+	letter-spacing: 0.8px;
 }
 .details p.tips{
 	font-size:1.3rem;
@@ -55,7 +58,7 @@ a{
 	font-size: 1.5rem;
 }
 .bottom_OrderNow{
-	position: absolute;bottom:0;
+	position: fixed;bottom:0;
 	width: 100%;
 	height: 6rem;
 	background: #24c789;
@@ -123,6 +126,33 @@ section .shop p.address{
 	line-height: 2.2rem;
 }
 /*/////联系方式页//////*/
+#box-wrap{
+	position: fixed; 
+	top: 0; left: 0; 
+	width: 100%; 
+	height: 100%; 
+	background-color: rgba(255,255,255,0.5);
+	z-index: 999999;
+	display: none;
+}
+#box-wrap .loader_box{
+	width: 32%;
+	height: 10rem;
+	border-radius: 4px;
+	background-color: rgba(76,76,76,0.5);
+	position: absolute;
+	left:50%;
+	top:40%;
+	margin-left: -16%;
+	margin-top: -16%;
+}
+#box-wrap .loader_box img{
+	position: absolute;
+	left: 50%;
+	top: 30%;
+	margin-left: -1.6rem;
+	margin-top: -1.6rem;
+}
 .letter_hack{
 	text-indent: 0.6rem;
 	letter-spacing: 0.6rem;
@@ -172,6 +202,9 @@ section .shop p.address{
 	-moz-user-select: none; /*火狐*/
 	-webkit-user-select: none; /*webkit*/
 	user-select: none;
+}
+.SendIdentCode.WidthHack{
+	padding: 2rem 2.6%;
 }
 .contact_PhoneNum .SendIdentCode a{
 	color:#fff;

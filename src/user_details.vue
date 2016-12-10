@@ -41,6 +41,12 @@
 				</div>
 			</div>
 		</section>
+		<footer>
+			<!--<img src="./assets/img/wx_loader.gif"/> -->
+			<div class="bottom_OrderNow" v-on:click="wxpay">
+				立即支付
+			</div>
+		</footer>
 	</div>
 </template>
 <script>
@@ -68,7 +74,7 @@ module.exports = {
 			}, function (res) {});
 		},
 		wxpay: function() {
-			this.$http.post(API_BASE_URL + '/order?token=' + localStorage.token, {order_id: order.order_id}).then(function (res) {
+			this.$http.post(API_BASE_URL + '/pay?token=' + localStorage.token, {order_id: this.order.order_id}).then(function (res) {
 				WeixinJSBridge.invoke('getBrandWCPayRequest', res.package, function(res){
 					// 使用以上方式判断前端返回,微信团队郑重提示：
 					// res.err_msg将在用户支付成功后返回 ok，但并不保证它绝对可靠
