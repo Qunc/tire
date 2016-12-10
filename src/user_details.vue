@@ -15,7 +15,7 @@
 					{{shop.name}}
 				</p>
 				<p class="ShopPhoneNumber">
-					{{shop.contacts_phone}}
+					{{shop.contacts_phone || shop.mobile}}
 				</p>
 				<p class="ShopContact">
 					<span>联系人：</span>{{shop.contacts}}
@@ -43,7 +43,6 @@
 		</section>
 	</div>
 </template>
-
 <script>
 module.exports = {
 	data: function () {
@@ -59,17 +58,15 @@ module.exports = {
 		userdetails_back: function(){
 			this.$router.push('/');
 		},
-
 		fetchData: function(){
 			this.$http.get(API_BASE_URL + '/order/' + this.$route.params.order_id + '?token='+localStorage.token).then(function (res) {
-				if (res.code != 0) {
+				if (res.body.err_code != 0) {
 					return;
 				}
-				this.order = res;
-				this.shop = res.shop;
-            }, function (res) {});
+				this.order = res.body;
+				this.shop = res.body.service_shop;
+			}, function (res) {});
 		},
-
 		wxpay: function() {
 			this.$http.post(API_BASE_URL + '/order?token=' + localStorage.token, {order_id: order.order_id}).then(function (res) {
 				WeixinJSBridge.invoke('getBrandWCPayRequest', res.package, function(res){
@@ -81,7 +78,6 @@ module.exports = {
 				});
 			})
 		}
-		
 	}
 }
 </script>

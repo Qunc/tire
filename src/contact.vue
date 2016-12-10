@@ -15,13 +15,15 @@
 			</div>
 			<div class="contact_PhoneNum WidthHack">
 				<input type="text" v-model="contacts_phone" placeholder="输入您的电话号码"/>
-				<div class="SendIdentCode" v-on:click="SendOver">
+				<div class="SendIdentCode" v-on:click="SendCode">
 					<a>发送验证码</a>
 				</div>
 			</div>
 			<div class="IdentCode">
 				<input type="text" v-model="verify_code" placeholder="输入验证码"/>
 			</div>
+
+
 		</section>
 		<footer>
 			<div class="bottom_OrderNow letter_hack" v-on:click="go_userdetails">
@@ -35,10 +37,11 @@
 module.exports = {
 	data: function () {
         return {
-        	contacts:'',
-        	contacts_phone:'',
-            verify_code:'',
+        	contacts: '',
+        	contacts_phone: '',
+            verify_code: '',
 			shop: {},
+			send_code: {}
         }
     },
 	created: function(){
@@ -52,12 +55,16 @@ module.exports = {
 			var data = {
 				contacts: this.contacts,
 				contacts_phone: this.contacts_phone,
-				service_shop_id:_id,
-				verify_code:this.verify_code
+				service_shop_id: this.shop._id,
+				verify_code: this.verify_code
 			};
+			console.log(data)
 			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, data).then(function (res) {
+				if (res.body.err_code != 0) {
+					return;
+				}
 				//跳转到订单详情页
-				this.$router.push('/user_details/' + res.order_id);
+				this.$router.push('/user_details/' + res.body.order_id);
             }, function (res) {});
 		},
 		fetchData: function(){
@@ -65,12 +72,14 @@ module.exports = {
 //          	this.billings.shop_id = res.data[0]._id;
 //          	this.billings.contacts = res.data[0].contacts;
 				//_id = res.body[0]._id;
-				 this.shop = res;
+				 this.shop = res.body;
             }, function (res) {});
             
 		},
-		SendOver: function(){
-			console.log(this);
+		SendCode: function(){
+			this.$http.get(API_BASE_URL + '/site/sms-code/' + this.contacts_phone + '?token=' + localStorage.token).then(function(res){
+
+			})
 		}
 		
 	}

@@ -29,11 +29,11 @@ var getQueryParam = function (paras) {
 //先设置一个token
 localStorage.setItem('token','58493a692e9ffc27a73dc024');
 
-//初始化
-Vue.http.get(API_BASE_URL + '/init')
 //检查是否保存有token
 var token = localStorage.getItem('token');
 var code = getQueryParam('code');
+
+//做一些初始化动作
 Vue.http.get(API_BASE_URL + '/init').then(function (res) {
     if (res.code == 0) {
         //wx.config
@@ -45,6 +45,7 @@ var gotoWechatOauth = function () {
     //获取微信授权地址，跳转微信授权
     Vue.http.get(API_BASE_URL + '/auth/url').then(function (res) {
         if (res.wechatOauthUrl) {
+            console.log('togo wechat')
             window.location.href = res.wechatOauthUrl;
         }
     })
@@ -64,7 +65,7 @@ if (!token) {
 } else {
     //检验token是否有效
     Vue.http.get(API_BASE_URL + '/auth?token=' + token).then(function(res){
-        if (res.code != 0) {
+        if (res._id) {
             gotoWechatOauth();
         }
     }, function (err) {
@@ -85,7 +86,7 @@ const router = new VueRouter({
         {path: '/', component: index },
         {path: '/SelectShop', component: SelectShop },
         {path: '/contact/:shop_id', component: contact },
-        {path:'/user_details',component: user_details },
+        {path:'/user_details/:order_id',component: user_details },
         {path:'/shop_details',component: shop_details }
     ]
 });

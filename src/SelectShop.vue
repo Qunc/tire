@@ -25,7 +25,6 @@ module.exports = {
     },
 	created: function(){
 		this.fetchData();
-		//转菊花
 	},
 	methods: {
 		SelectShop_back: function(){
@@ -37,7 +36,7 @@ module.exports = {
 		fetchData: function(){
             this.$http.get(API_BASE_URL + '/shop?token='+localStorage.token).then(function (res) {
             	
-            	this.SelectShop_Data = res.data;
+            	this.SelectShop_Data = res.body;
             	
             }, function (res) {});
 		}
