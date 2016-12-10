@@ -1,37 +1,43 @@
 <template>
     <div>
-		<header class="header_title">
-			<div class="SelectShop_Back" v-on:click="contact_back">
-				<img src="./assets/img/left.png"/>
+		<div id="box-wrap">
+			<div class="loader_box">
+				<img src="./assets/img/wx_loader.gif"/>
 			</div>
-			<span>{{shop.name}}</span>
-		</header>
-		<section>
-			<div class="contact">
-				<p>联系方式</p>
-			</div>
-			<div class="contact_name">
-				<input type="text" v-model="contacts" placeholder="输入您的姓名"/>
-			</div>
-			<div class="contact_PhoneNum WidthHack">
-				<input type="text" v-model="contacts_phone" placeholder="输入您的电话号码"/>
-				<div class="SendIdentCode" v-on:click="SendOver">
-					<a>发送验证码</a>
+		</div>
+			<header class="header_title">
+				<div class="SelectShop_Back" v-on:click="contact_back">
+					<img src="./assets/img/left.png"/>
 				</div>
-				<!--<div class="SendIdentCode" v-on:click="SendOver">
-					<a>发送验证码</a>
-				</div>-->
-				<!-- JS控制,秒数为个位数时,padding:2rem 2.6%; -->
-			</div>
-			<div class="IdentCode">
-				<input type="text" v-model="verify_code" placeholder="输入验证码"/>
-			</div>
-		</section>
-		<footer>
-			<div class="bottom_OrderNow letter_hack" v-on:click="go_userdetails">
-				提交
-			</div>
-		</footer>
+				<span>{{shop.name}}</span>
+			</header>
+			<section>
+				<div class="contact">
+					<p>联系方式</p>
+				</div>
+				<div class="contact_name">
+					<input type="text" v-model="contacts" placeholder="输入您的姓名"/>
+				</div>
+				<div class="contact_PhoneNum WidthHack">
+					<input type="text" v-model="contacts_phone" placeholder="输入您的电话号码"/>
+					<div class="SendIdentCode" v-on:click="SendOver">
+						<a>发送验证码</a>
+					</div>
+					<!--<div class="SendIdentCode" v-on:click="SendOver">
+						<a>发送验证码</a>
+					</div>-->
+					<!-- JS控制,秒数为个位数时,padding:2rem 2.6%; -->
+				</div>
+				<div class="IdentCode">
+					<input type="text" v-model="verify_code" placeholder="输入验证码"/>
+				</div>
+			</section>
+			<footer>
+				<div class="bottom_OrderNow letter_hack" v-on:click="go_userdetails">
+					提交
+				</div>
+			</footer>
+		
 	</div>
 </template>
 
