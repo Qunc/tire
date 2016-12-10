@@ -34,6 +34,7 @@ a{
 	box-sizing: border-box;
 	padding: 0 4%;
 	margin-top: 5.5rem;
+	margin-bottom: 6rem;
 }
 .details p.name{
 	font-size: 1.5rem;
@@ -55,7 +56,7 @@ a{
 	font-size: 1.5rem;
 }
 .bottom_OrderNow{
-	position: absolute;bottom:0;
+	position: fixed;bottom:0;
 	width: 100%;
 	height: 6rem;
 	background: #24c789;
