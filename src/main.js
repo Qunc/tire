@@ -27,7 +27,7 @@ var getQueryParam = function (paras) {
 }
 
 //先设置一个token
-//localStorage.setItem('token','58493a692e9ffc27a73dc024');
+localStorage.setItem('token','58493a692e9ffc27a73dc024');
 
 //检查是否保存有token
 var token = localStorage.getItem('token');

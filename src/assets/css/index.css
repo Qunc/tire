@@ -70,6 +70,9 @@ a{
 	-webkit-user-select: none; /*webkit*/
 	user-select: none;
 }
+.bottom_OrderNow:active{
+	background: #20b37b;
+}
 /*/////选择门店页////////*/
 .header_title{
 	width: 100%;
@@ -126,6 +129,9 @@ section .shop p.address{
 	line-height: 2.2rem;
 }
 /*/////联系方式页//////*/
+.bottom_OrderNow.letter_hack:active{
+	background: #20b37b;
+}
 #box-wrap{
 	position: fixed; 
 	top: 0; left: 0; 
@@ -203,10 +209,13 @@ section .shop p.address{
 	-webkit-user-select: none; /*webkit*/
 	user-select: none;
 }
+.contact_PhoneNum .SendIdentCode:active{
+	background: #20b37b;
+}
 .SendIdentCode.WidthHack{
 	padding: 2rem 2.6%;
 }
-.contact_PhoneNum .SendIdentCode a{
+.contact_PhoneNum .SendIdentCode{
 	color:#fff;
 }
 /*placehold*/

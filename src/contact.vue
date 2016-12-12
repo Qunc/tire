@@ -21,12 +21,12 @@
 				<div class="contact_PhoneNum WidthHack">
 					<input type="text" v-model="contacts_phone" placeholder="输入您的电话号码"/>
 					<div class="SendIdentCode" v-on:click="SendCode">
-						<a>发送验证码</a>
+						发送验证码
 					</div>
-					<!--<div class="SendIdentCode" v-on:click="SendCode">
-						<a>发送验证码</a>
+					<!--<div class="SendIdentCode WidthHack" v-on:click="SendCode">
+						重新发送59s
 					</div>-->
-					<!-- JS控制,秒数为个位数时,padding:2rem 2.6%; -->
+					<!-- JS控制,秒数为个位数时,设置padding:2rem 3.47%; -->
 				</div>
 				<div class="IdentCode">
 					<input type="text" v-model="verify_code" placeholder="输入验证码"/>
@@ -49,6 +49,7 @@ module.exports = {
             verify_code: '',
 			shop: {},
 			send_code: {}
+			
         }
     },
 	created: function(){
