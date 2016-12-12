@@ -1,10 +1,10 @@
 <template>
     <div>
-		<div id="box-wrap">
+		<!--<div id="box_wrap">
 			<div class="loader_box">
 				<img src="./assets/img/wx_loader.gif"/>
 			</div>
-		</div>
+		</div>-->
 			<header class="header_title">
 				<div class="SelectShop_Back" v-on:click="contact_back">
 					<img src="./assets/img/left.png"/>

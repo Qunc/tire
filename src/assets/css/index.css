@@ -132,7 +132,7 @@ section .shop p.address{
 .bottom_OrderNow.letter_hack:active{
 	background: #20b37b;
 }
-#box-wrap{
+#box_wrap{
 	position: fixed; 
 	top: 0; left: 0; 
 	width: 100%; 
@@ -141,7 +141,7 @@ section .shop p.address{
 	z-index: 999999;
 	display: none;
 }
-#box-wrap .loader_box{
+#box_wrap .loader_box{
 	width: 32%;
 	height: 10rem;
 	border-radius: 4px;
@@ -152,7 +152,7 @@ section .shop p.address{
 	margin-left: -16%;
 	margin-top: -16%;
 }
-#box-wrap .loader_box img{
+#box_wrap .loader_box img{
 	position: absolute;
 	left: 50%;
 	top: 30%;
