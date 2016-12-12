@@ -197,23 +197,27 @@ section .shop p.address{
 	border-right: 0;
 }
 .contact_PhoneNum .SendIdentCode{
-	width: 22%;
-	height: 5rem;
+	width: 24.27%;
+	height: 5.4rem;
 	background: #24c789;
 	font-size: 1.3rem;
 	box-sizing: border-box;
-	padding: 2rem 3.47%;
-	display: inline;
+	float: right;
+	margin-top: 1.5rem;
+	margin-right: 1.525rem;
+	display: block;
 	border-top:1px solid #ccc;
 	-moz-user-select: none; /*火狐*/
 	-webkit-user-select: none; /*webkit*/
 	user-select: none;
+	text-align: center;
+	line-height: 5.4rem;
 }
 .contact_PhoneNum .SendIdentCode:active{
 	background: #20b37b;
 }
-.SendIdentCode.WidthHack{
-	padding: 2rem 2.6%;
+.SendIdentCode.BgHack{
+	background: #b9b9b9;
 }
 .contact_PhoneNum .SendIdentCode{
 	color:#fff;

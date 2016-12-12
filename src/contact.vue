@@ -15,22 +15,27 @@
 				<div class="contact">
 					<p>联系方式</p>
 				</div>
+				
 				<div class="contact_name">
 					<input type="text" v-model="contacts" placeholder="输入您的姓名"/>
 				</div>
+				<span style="color: red">{{errors.contacts}}</span>
 				<div class="contact_PhoneNum WidthHack">
 					<input type="text" v-model="contacts_phone" placeholder="输入您的电话号码"/>
-					<div class="SendIdentCode" v-on:click="SendCode">
+					<div class="SendIdentCode" v-on:click="SendCode" v-show="verify_code_active">
 						发送验证码
 					</div>
-					<!--<div class="SendIdentCode WidthHack" v-on:click="SendCode">
-						重新发送59s
-					</div>-->
+					<div class="SendIdentCode BgHack" v-show="!verify_code_active" id="SendIdentCode">
+						{{verify_code_time ? ('重新发送' + verify_code_time + 's') : '正在发送'}}
+					</div>
 					<!-- JS控制,秒数为个位数时,设置padding:2rem 3.47%; -->
 				</div>
+				<span style="color: red">{{errors.contacts_phone}}</span>
+				
 				<div class="IdentCode">
 					<input type="text" v-model="verify_code" placeholder="输入验证码"/>
 				</div>
+				<span style="color: red">{{errors.verify_code}}</span>
 			</section>
 			<footer>
 				<div class="bottom_OrderNow letter_hack" v-on:click="go_userdetails">
@@ -48,8 +53,10 @@ module.exports = {
         	contacts_phone: '',
             verify_code: '',
 			shop: {},
-			send_code: {}
-			
+			send_code: {},
+			verify_code_active: true,
+			verify_code_time: 0,
+			errors: {}
         }
     },
 	created: function(){
@@ -70,6 +77,7 @@ module.exports = {
 			this.$http.post(API_BASE_URL + '/order?token='+localStorage.token, data).then(function (res) {
 				console.log(res.body.err_code != 0)
 				if (res.body.err_code != 0) {
+					this.errors = res.body.err_msg;
 					return;
 				}
 				//跳转到订单详情页
@@ -86,9 +94,50 @@ module.exports = {
             
 		},
 		SendCode: function(){
+			
+//			function VerifyCountDown (){
+//				return this.verify_code_time -= 1;
+//			}
+//			var time = setInterval(function(){VerifyCountDown()},1000);
+			this.verify_code_active = false;
+			document.getElementById('SendIdentCode').style.background = '#20b37b';
 			this.$http.get(API_BASE_URL + '/site/sms-code/' + this.contacts_phone + '?token=' + localStorage.token).then(function(res){
-
+				document.getElementById('SendIdentCode').style.background = '#b9b9b9';
+				if (res.body.err_code != 0) {
+					this.verify_code_active = true;
+					this.errors.verify_code = res.bdy.err_msg;
+					//错误
+					
+					//结束
+					return;
+				}
+//				res.body.interval = 10;
+				this.verify_code_time = res.body.interval - 1;
+				var self = this;
+				var timeId = setInterval(function () {
+					self.verify_code_time --;
+					console.log('intval');
+					
+					
+					
+					if (self.verify_code_time <= 0) {
+						self.verify_code_time = 0;
+						this.verify_code_active = true;
+						
+						clearInterval(timeId);
+					}
+					if(self.verify_code_time < 10){
+						self.verify_code_time = '0' + self.verify_code_time;
+					}
+					
+					
+				}, 1000);
+			}, function () {
+				//失败的话，按钮变为可点击状态
+				this.verify_code_active = true;
 			})
+			
+			
 		}
 		
 	}
