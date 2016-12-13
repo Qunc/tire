@@ -1,9 +1,9 @@
 <template>
     <div>
 		<header class="header_title">
-			<div class="SelectShop_Back" v-on:click="shop_details_back">
+			<!--<div class="SelectShop_Back" v-on:click="shop_details_back">
 				<img src="./assets/img/left.png"/>
-			</div>
+			</div>-->
 			<span>{{order.service_shop.contacts}}</span>
 		</header>
 		<section>
@@ -51,7 +51,8 @@ module.exports = {
 	},
 	methods: {
 		shop_details_back: function(){
-			this.$router.push('/user_details');
+			console.log(this.order);
+			this.$router.push('/user_details/' + this.order.order_id);
 		},
 		fetchData: function(){
 			this.$http.get(API_BASE_URL + '/order/' + this.$route.params.order_id + '?token='+localStorage.token).then(function (res) {
