@@ -43,7 +43,7 @@
 		</section>
 		<footer>
 			<!--<img src="./assets/img/wx_loader.gif"/> -->
-			<div class="bottom_OrderNow" v-on:click="wxpay">
+			<div class="bottom_OrderNow" v-on:click="wxpay" id="bottom_OrderNow">
 				立即支付
 			</div>
 		</footer>
@@ -54,7 +54,8 @@ module.exports = {
 	data: function () {
 		return {
 			order: {},
-			shop: {}
+			shop: {},
+			wxpay_disable: false
 		}
 	},
 	created: function () {
@@ -69,21 +70,34 @@ module.exports = {
 				if (res.body.err_code != 0) {
 					return;
 				}
+				else if(res.body.pay_status != 0){
+					this.wxpay_disable = true;
+					if (res.body.pay_status == 1){
+						document.getElementById("bottom_OrderNow").style.background = "#b9b9b9";
+						document.getElementById("bottom_OrderNow").innerHTML = "已支付";
+					}
+					else if (res.body.pay_status == 2){
+						document.getElementById("bottom_OrderNow").style.background = "#b9b9b9";
+						document.getElementById("bottom_OrderNow").innerHTML = "已退款";
+					}
+				}
 				this.order = res.body;
 				this.shop = res.body.service_shop;
 			}, function (res) {});
 		},
 		wxpay: function() {
-			this.$http.post(API_BASE_URL + '/pay?token=' + localStorage.token, {order_id: this.order.order_id}).then(function (res) {
-				//console.log(res.body.package);
-				WeixinJSBridge.invoke('getBrandWCPayRequest', res.body.package, function(res){
-					// 使用以上方式判断前端返回,微信团队郑重提示：
-					// res.err_msg将在用户支付成功后返回 ok，但并不保证它绝对可靠
-					if(res.err_msg == "get_brand_wcpay_request：ok" ) {
-
-					}
-				});
-			})
+			if(this.wxpay_disable == false){
+				this.$http.post(API_BASE_URL + '/pay?token=' + localStorage.token, {order_id: this.order.order_id}).then(function (res) {
+					//console.log(res.body.package);
+					WeixinJSBridge.invoke('getBrandWCPayRequest', res.body.package, function(res){
+						// 使用以上方式判断前端返回,微信团队郑重提示：
+						// res.err_msg将在用户支付成功后返回 ok，但并不保证它绝对可靠
+						if(res.err_msg == "get_brand_wcpay_request：ok" ) {
+	
+						}
+					});
+				})
+			}
 		}
 	}
 }

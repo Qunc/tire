@@ -47,7 +47,13 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: true
+    noInfo: true,
+    compress: true,
+    historyApiFallback: {
+	    rewrites: [
+	        { from: /^\/(?:dist)/, to: '/index.html' }
+	    ]
+		},
   },
   devtool: '#eval-source-map'
 }

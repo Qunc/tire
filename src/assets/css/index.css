@@ -178,8 +178,9 @@ section .shop p.address{
 	font-weight: bold;
 }
 .contact_name input,.contact_PhoneNum input,.IdentCode input{
-	width: 88%;
+	width: 93%;
 	height: 5rem;
+	box-sizing: border-box;
 	border:1px solid #ccc;
 	margin: 1.5rem 3.8% 0 3.8%;
 	padding-left: 1.5rem;
@@ -192,26 +193,26 @@ section .shop p.address{
 	width: 100%;
 }
 .contact_PhoneNum.WidthHack input{
-	width: 64%;
-	margin-right: -0.5rem;
+	width: 64.5%;
+	margin-right: 0;
 	border-right: 0;
 }
 .contact_PhoneNum .SendIdentCode{
-	width: 24.27%;
-	height: 5.4rem;
+	width: 28.27%;
+	height: 5rem;
 	background: #24c789;
 	font-size: 1.3rem;
 	box-sizing: border-box;
 	float: right;
 	margin-top: 1.5rem;
-	margin-right: 1.525rem;
+	margin-right: 3.4%;
 	display: block;
-	border-top:1px solid #ccc;
+	border:1px solid #ccc;
 	-moz-user-select: none; /*火狐*/
 	-webkit-user-select: none; /*webkit*/
 	user-select: none;
 	text-align: center;
-	line-height: 5.4rem;
+	line-height: 5rem;
 }
 .contact_PhoneNum .SendIdentCode:active{
 	background: #20b37b;
@@ -221,6 +222,12 @@ section .shop p.address{
 }
 .contact_PhoneNum .SendIdentCode{
 	color:#fff;
+}
+.error_tips{
+	color: red;
+	display:block;
+	margin:0.5rem 0 -1rem 1.4rem;
+	font-size: 12px;
 }
 /*placehold*/
 .contact_name input::-webkit-input-placeholder,.contact_PhoneNum input::-webkit-input-placeholder,.IdentCode input::-webkit-input-placeholder{ /* WebKit browsers */ 
