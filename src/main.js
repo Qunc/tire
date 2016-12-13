@@ -86,7 +86,7 @@ const router = new VueRouter({
         {path: '/SelectShop', component: SelectShop },
         {path: '/contact/:shop_id', component: contact },
         {path:'/user_details/:order_id',component: user_details },
-        {path:'/shop_details',component: shop_details }
+        {path:'/shop_details/:order_id',component: shop_details }
     ]
 });
 

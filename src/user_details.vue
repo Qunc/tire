@@ -37,7 +37,7 @@
 					经典轮胎 205/55R16 PRIMACY 3ST浩悦91W
 				</div>
 				<div class="ProductPrice">
-					&yen; {{order.amount / 100}}
+					&yen; {{(order.amount/100).toFixed(2)}}
 				</div>
 			</div>
 		</section>
