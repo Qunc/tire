@@ -17,6 +17,9 @@
 	</div>
 </template>
 <script>
+
+var geo = require('./geo.js');
+
 module.exports = {
 	data: function () {
         return {
@@ -24,6 +27,21 @@ module.exports = {
         }
     },
 	created: function(){
+		//alert('');
+		var obj_vue = this;
+		geo.getLocation(function(ret){
+			var res = ret.body;
+			console.log(res.status)
+			if (res.status != 0) {
+				return;
+	        }
+			var lng = res.result[0].x;
+			var lat = res.result[0].y;
+			obj_vue.$http.get(API_BASE_URL + '/shop?token='+localStorage.token + '&coord[lng]=' + lng + '&coord[lat]=' + lat).then(function (res) {
+        		obj_vue.SelectShop_Data = res.body;
+            }, function (res) {});
+		});
+		
 		this.fetchData();
         document.getElementsByTagName("body")[0].setAttribute("style","background-color:#ebebeb");
 		//转菊花

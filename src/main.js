@@ -4,6 +4,7 @@ var Vue = require('vue');
 var VueRouter = require('vue-router');
 var VueResource = require('vue-resource');
 
+
 Vue.use(VueRouter);
 Vue.use(VueResource);
 Vue.http.headers.common['Content-Type'] = 'application/json';
@@ -34,10 +35,12 @@ var token = localStorage.getItem('token');
 var code = getQueryParam('code');
 
 //做一些初始化动作
-Vue.http.get(API_BASE_URL + '/init').then(function (res) {
-    if (res.body.err_code == 0) {
+var currentUri = location.href.split('#')[0];
+Vue.http.get(API_BASE_URL + '/init?uri=' + encodeURIComponent(currentUri)).then(function (res) {
+    if (res.body.js_config) {
         //wx.config
-        wx && wx.config(res.js_config)
+        wx.config(res.body.js_config);
+        wx.error(function(res){});
     }
 })
 
@@ -94,6 +97,7 @@ const router = new VueRouter({
 //export default {
 //SendOverText
 //};
+global.a = '111';
 
 new Vue({
     router: router

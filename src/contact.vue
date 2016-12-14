@@ -81,7 +81,7 @@ module.exports = {
 				}
 				//跳转到订单详情页
 				this.$router.push('/user_details/' + res.body.order_id);
-				//this.$router.push('/user_details/' + '584a69aa2e9ffc2f350ea8c4');//用已支付订单号来测试button状态
+				//this.$router.push('/user_details/' + '584e140a2e9ffc4740461d0e');//用已支付订单号来测试button状态
             }, function (res) {});
 		},
 		fetchData: function(){
@@ -95,7 +95,7 @@ module.exports = {
 		},
 		SendCode: function(){
 			
-
+			
 			this.verify_code_active = false;
 
 			document.getElementById('SendIdentCode').style.background = '#20b37b';
