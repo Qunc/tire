@@ -27,9 +27,6 @@ var getQueryParam = function (paras) {
     }
 }
 
-//先设置一个token
-localStorage.setItem('token','58493a692e9ffc27a73dc024');
-
 //检查是否保存有token
 var token = localStorage.getItem('token');
 var code = getQueryParam('code');
@@ -53,6 +50,13 @@ var gotoWechatOauth = function () {
     })
 }
 
+//当token无效被删除时，重新认证
+window.addEventListener('storage', function (e) {
+	if (!e.newValue) {
+		gotoWechatOauth();
+	}
+})
+
 if (!token) {
     //如果没有token，是否已经通过微信授权
     //如果通过授权，就用code换取用户token
@@ -68,10 +72,13 @@ if (!token) {
     //检验token是否有效
     Vue.http.get(API_BASE_URL + '/auth?token=' + token).then(function(res){
         if (!res.body._id) {
-            gotoWechatOauth();
+        	//无效删除
+        	localStorage.removeItem('token');
+            //gotoWechatOauth();
         }
     }, function (err) {
-        gotoWechatOauth();
+        //无效删除
+        localStorage.removeItem('token');
     })
 }
 
@@ -97,7 +104,7 @@ const router = new VueRouter({
 //export default {
 //SendOverText
 //};
-global.a = '111';
+//global.a = '111';
 
 new Vue({
     router: router
