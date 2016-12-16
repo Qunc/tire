@@ -46,10 +46,10 @@ GeoParser.prototype.geocoder = function (address, cb) {
 
 GeoParser.prototype.getLocation = function (cb) {
 	//this.geoconv(113.323568, 23.146436, cb);return;
-	alert(ua);
+	//alert(ua);
     var self = this;
     var ua = window.navigator.userAgent.toLowerCase();
-    
+    //alert(ua.match(/MicroMessenger/i) == 'micromessenger');
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){
         wx.getLocation({
             type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
