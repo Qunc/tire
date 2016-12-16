@@ -325,7 +325,7 @@ section .shop p.address{
 .user_details_indent .ProductName{
 	font-size: 1.4rem;
 	float: left;
-	width: 24rem;
+	width: 64.00%;
 	word-wrap:break-word;
 	word-break:break-all;
 	line-height: 2.5rem;

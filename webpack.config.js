@@ -66,7 +66,8 @@ if (process.env.NODE_ENV === 'production') {
       'process.env': {
         NODE_ENV: '"production"'
       },
-      API_BASE_URL: '"http://api.anmiaoda.com"'
+      API_BASE_URL: '"http://api.anmiaoda.com"',
+      TIRE_PRICE:'3000'
     }),
 /*
     new webpack.optimize.UglifyJsPlugin({
@@ -87,7 +88,8 @@ if (process.env.NODE_ENV === 'production') {
       'process.env': {
         NODE_ENV: '"test"'
       },
-      API_BASE_URL: '"http://api-test.anmiaoda.com"'
+      API_BASE_URL: '"http://api-test.anmiaoda.com"',
+      TIRE_PRICE:'0.01'
     }),
     /*
      new webpack.optimize.UglifyJsPlugin({
@@ -106,7 +108,8 @@ if (process.env.NODE_ENV === 'production') {
       'process.env': {
         NODE_ENV: '"development"'
       },
-      API_BASE_URL: '"http://api-test.anmiaoda.com"'
+      API_BASE_URL: '"http://api-test.anmiaoda.com"',
+      TIRE_PRICE:'0.01'
     }),
   ])
 }

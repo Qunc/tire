@@ -26,7 +26,7 @@
 						发送验证码
 					</div>
 					<div class="SendIdentCode BgHack" v-show="!verify_code_active" id="SendIdentCode">
-						{{verify_code_time ? (verify_code_time + '秒后可重新发送') : '正在发送'}}
+						{{verify_code_time ? (verify_code_time + '秒重新发送') : '正在发送'}}
 					</div>
 				</div>
 				<span class="error_tips">{{errors.contacts_phone}}</span>
@@ -103,7 +103,7 @@ module.exports = {
 				document.getElementById('SendIdentCode').style.background = '#b9b9b9';
 				if (res.body.err_code != 0) {
 					this.verify_code_active = true;
-					this.errors.verify_code = res.bdy.err_msg;
+					this.errors.verify_code = res.body.err_msg;
 					//错误
 					
 					//结束
