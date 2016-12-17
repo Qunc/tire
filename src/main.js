@@ -34,18 +34,6 @@ var getQueryParam = function (paras) {
 var token = localStorage.getItem('token');
 var code = getQueryParam('code');
 
-//做一些初始化动作
-var currentUri = location.href.split('#')[0];
-Vue.http.get(API_BASE_URL + '/init?uri=' + encodeURIComponent(currentUri)).then(function (res) {
-    if (res.body.js_config) {
-        //wx.config
-        wx.config(res.body.js_config);
-        wx.error(function(res){});
-    }
-})
-
-
-
 var gotoWechatOauth = function () {
     //获取微信授权地址，跳转微信授权
     Vue.http.get(API_BASE_URL + '/auth/url').then(function (res) {
@@ -99,7 +87,7 @@ var shop_details = require('./shop_details.vue');
 var user_details = require('./user_details.vue');
 
 const router = new VueRouter({
-    mode: 'history',
+    //mode: 'history',
     base: __dirname,
     routes: [
         {path: '/', component: index },
