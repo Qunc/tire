@@ -12,10 +12,10 @@
 					<img src="./assets/img/address.png"/>
 				</div>
 				<p class="ShopName">
-					{{shop.name}}
+					<span>{{shop.name}}</span>
 				</p>
 				<p class="ShopPhoneNumber">
-					{{shop.contacts_phone || shop.mobile}}
+					<span>{{shop.contacts_phone || shop.mobile}}</span>
 				</p>
 				<p class="ShopContact">
 					<span>联系人：</span>{{shop.contacts}}
