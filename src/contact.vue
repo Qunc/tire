@@ -26,7 +26,7 @@
 						发送验证码
 					</div>
 					<div class="SendIdentCode BgHack" v-show="!verify_code_active" id="SendIdentCode">
-						{{verify_code_time ? (verify_code_time + '秒后重发') : '正在发送'}}
+						{{verify_code_time ? (verify_code_time + ' 秒后重发') : '正在发送'}}
 					</div>
 				</div>
 				<span class="error_tips">{{errors.contacts_phone}}</span>

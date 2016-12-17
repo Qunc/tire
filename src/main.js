@@ -92,7 +92,7 @@ var shop_details = require('./shop_details.vue');
 var user_details = require('./user_details.vue');
 
 const router = new VueRouter({
-    //mode: 'history',
+    mode: 'history',
     base: __dirname,
     routes: [
         {path: '/', component: index },
