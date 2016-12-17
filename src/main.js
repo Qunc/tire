@@ -26,7 +26,7 @@ var getQueryParam = function (paras) {
         return returnValue;
     }
 }
-
+localStorage.setItem('token','5853bb612e9ffc3b58748ae4');
 //检查是否保存有token
 var token = localStorage.getItem('token');
 var code = getQueryParam('code');
