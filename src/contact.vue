@@ -26,7 +26,7 @@
 						发送验证码
 					</div>
 					<div class="SendIdentCode BgHack" v-show="!verify_code_active" id="SendIdentCode">
-						{{verify_code_time ? (verify_code_time + '秒重新发送') : '正在发送'}}
+						{{verify_code_time ? (verify_code_time + '秒后重发') : '正在发送'}}
 					</div>
 				</div>
 				<span class="error_tips">{{errors.contacts_phone}}</span>
@@ -43,7 +43,11 @@
 			</footer>
 	</div>
 </template>
-
+<style>
+.BgHack {
+	background-color: #20b37b;
+}
+</style>
 <script>
 module.exports = {
 	data: function () {
@@ -94,13 +98,9 @@ module.exports = {
             
 		},
 		SendCode: function(){
-			
-			
 			this.verify_code_active = false;
 
-			document.getElementById('SendIdentCode').style.background = '#20b37b';
 			this.$http.get(API_BASE_URL + '/site/sms-code/' + this.contacts_phone + '?token=' + localStorage.token).then(function(res){
-				document.getElementById('SendIdentCode').style.background = '#b9b9b9';
 				if (res.body.err_code != 0) {
 					this.verify_code_active = true;
 					this.errors.verify_code = res.body.err_msg;

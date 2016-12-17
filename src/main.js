@@ -27,20 +27,6 @@ var getQueryParam = function (paras) {
     }
 }
 
-//检查是否保存有token
-var token = localStorage.getItem('token');
-var code = getQueryParam('code');
-
-//做一些初始化动作
-var currentUri = location.href.split('#')[0];
-Vue.http.get(API_BASE_URL + '/init?uri=' + encodeURIComponent(currentUri)).then(function (res) {
-    if (res.body.js_config) {
-        //wx.config
-        wx.config(res.body.js_config);
-        wx.error(function(res){});
-    }
-})
-
 var gotoWechatOauth = function () {
     //获取微信授权地址，跳转微信授权
     Vue.http.get(API_BASE_URL + '/auth/url').then(function (res) {
@@ -50,12 +36,9 @@ var gotoWechatOauth = function () {
     })
 }
 
-//当token无效被删除时，重新认证
-window.addEventListener('storage', function (e) {
-	if (!e.newValue) {
-		gotoWechatOauth();
-	}
-})
+//检查是否保存有token
+var token = localStorage.getItem('token');
+var code = getQueryParam('code');
 
 if (!token) {
     //如果没有token，是否已经通过微信授权
@@ -69,16 +52,20 @@ if (!token) {
         gotoWechatOauth();
     }
 } else {
+    //暂时删除token的本地存储,待验证完成后再存入
+    localStorage.removeItem('token');
     //检验token是否有效
     Vue.http.get(API_BASE_URL + '/auth?token=' + token).then(function(res){
         if (!res.body._id) {
         	//无效删除
         	localStorage.removeItem('token');
-            //gotoWechatOauth();
+            gotoWechatOauth();
+            return
+        } else {
+            localStorage.setItem('token', token)
         }
     }, function (err) {
-        //无效删除
-        localStorage.removeItem('token');
+        gotoWechatOauth();
     })
 }
 
@@ -89,7 +76,7 @@ var shop_details = require('./shop_details.vue');
 var user_details = require('./user_details.vue');
 
 const router = new VueRouter({
-    mode: 'history',
+    //mode: 'history',
     base: __dirname,
     routes: [
         {path: '/', component: index },
@@ -99,12 +86,6 @@ const router = new VueRouter({
         {path:'/shop_details/:order_id',component: shop_details }
     ]
 });
-
-//const SendOverText = '123';
-//export default {
-//SendOverText
-//};
-//global.a = '111';
 
 new Vue({
     router: router

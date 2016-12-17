@@ -33,26 +33,16 @@ GeoParser.prototype.geoconv = function (long, lat, cb) {
 
 GeoParser.prototype.geocoder = function (address, cb) {
     var url = 'http://api.map.baidu.com/geocoder/v2/?ak=' + this.ak + '&output=json&callback=?&address=' + address + (city ? '&city=' + city : '');
-    /*
-    $.ajax({
-        url: url,
-        type: 'get',
-        dataType: 'jsonp',
-        jsonpCallback: createCallback(cb)
-    });
-    */
     Vue.http.jsonp(url).then(cb)
 }
 
 GeoParser.prototype.getLocation = function (cb) {
 	//this.geoconv(113.323568, 23.146436, cb);return;
-	//alert(ua);
     var self = this;
     var ua = window.navigator.userAgent.toLowerCase();
-    //alert(ua.match(/MicroMessenger/i) == 'micromessenger');
     if(ua.match(/MicroMessenger/i) == 'micromessenger'){
         wx.getLocation({
-            type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+            type: 'wgs84',
             success: function (res) {
                 self.geoconv(res.longitude, res.latitude, cb);
             }
