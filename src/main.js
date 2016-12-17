@@ -72,19 +72,23 @@ if (!token) {
     }
 } else {
     //暂时删除token的本地存储,待验证完成后再存入
-    localStorage.removeItem('token');
+    //localStorage.removeItem('token');
     //检验token是否有效
     Vue.http.get(API_BASE_URL + '/auth?token=' + token).then(function(res){
         if (!res.body._id) {
         	//无效删除
         	localStorage.removeItem('token');
-            gotoWechatOauth();
+            //500毫秒后跳转到微信授权
+            setTimeout(gotoWechatOauth, 500);
             return
         } else {
-            localStorage.setItem('token', token)
+            localStorage.setItem('token', res.body.token)
         }
     }, function (err) {
-        gotoWechatOauth();
+        //无效删除
+        localStorage.removeItem('token');
+        //500毫秒后跳转到微信授权
+        setTimeout(gotoWechatOauth, 500);
     })
 }
 
