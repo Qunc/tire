@@ -19,7 +19,6 @@
 <script>
 
 var geo = require('./geo.js');
-
 module.exports = {
 	data: function () {
         return {
@@ -27,21 +26,31 @@ module.exports = {
         }
     },
 	created: function(){
-		//alert('');
-		var obj_vue = this;
-		geo.getLocation(function(ret){
-			var res = ret.body;
-			console.log(res.status)
-			if (res.status != 0) {
-				return;
-	        }
-			var lng = res.result[0].x;
-			var lat = res.result[0].y;
-			obj_vue.$http.get(API_BASE_URL + '/shop?token='+localStorage.token + '&coord[lng]=' + lng + '&coord[lat]=' + lat).then(function (res) {
-        		obj_vue.SelectShop_Data = res.body;
-            }, function (res) {});
-		});
-		
+		//做一些初始化动作
+		var currentUri = location.href.split('#')[0];
+		currentUri += currentUri.lastIndexOf('/') !== currentUri.length - 1 ? '/' : '';
+
+		this.$http.get(API_BASE_URL + '/init?uri=' + encodeURIComponent(currentUri)).then(function (res) {
+			if (res.body.js_config) {
+				//wx.config
+				wx.config(res.body.js_config);
+				wx.ready(function(){
+					var obj_vue = this;
+					geo.getLocation(function(ret){
+						var res = ret.body;
+						console.log(res.status)
+						if (res.status != 0) {
+							return;
+						}
+						var lng = res.result[0].x;
+						var lat = res.result[0].y;
+						localStorage.setItem('lng', lng);
+						localStorage.setItem('lat', lat);
+						obj_vue.fetchData();
+					});
+				})
+			}
+		})
 		this.fetchData();
         document.getElementsByTagName("body")[0].setAttribute("style","background-color:#ebebeb");
 		//转菊花
@@ -54,10 +63,16 @@ module.exports = {
 //			this.$router.push('/contact');
 //		},
 		fetchData: function(){
-            this.$http.get(API_BASE_URL + '/shop?token='+localStorage.token).then(function (res) {
-            	
+			var lng = localStorage.getItem('lng');
+			var lat = localStorage.getItem('lat');
+			var url;
+			if (lng && lat) {
+				url = API_BASE_URL + '/shop?token='+localStorage.token + '&lng=' + lng + '&lat=' + lat;
+			} else {
+				url = API_BASE_URL + '/shop?token='+localStorage.token;
+			}
+            this.$http.get(url).then(function (res) {
             	this.SelectShop_Data = res.body;
-            	
             }, function (res) {});
 		}
 	}
