@@ -21,7 +21,7 @@
 				</div>
 				<span class="error_tips">{{errors.contacts}}</span>
 				<div class="contact_PhoneNum WidthHack">
-					<input type="text" v-model="contacts_phone" placeholder="输入您的电话号码"/>
+					<input type="number" v-model="contacts_phone" placeholder="输入您的电话号码"/>
 					<div class="SendIdentCode" v-on:click="SendCode" v-show="verify_code_active">
 						发送验证码
 					</div>
@@ -32,7 +32,7 @@
 				<span class="error_tips">{{errors.contacts_phone}}</span>
 				
 				<div class="IdentCode">
-					<input type="text" v-model="verify_code" placeholder="输入验证码"/>
+					<input type="number" v-model="verify_code" placeholder="输入验证码"/>
 				</div>
 				<span class="error_tips">{{errors.verify_code}}</span>
 			</section>
