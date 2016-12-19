@@ -3,6 +3,7 @@ require('./assets/css/index.css');
 var Vue = require('vue');
 var VueRouter = require('vue-router');
 var VueResource = require('vue-resource');
+var geo = require('./geo.js');
 
 
 Vue.use(VueRouter);
@@ -27,8 +28,30 @@ var getQueryParam = function (paras) {
     }
 }
 
+//做一些初始化动作
+var currentUri = location.href.split('#')[0];
+currentUri += currentUri.lastIndexOf('/') !== currentUri.length - 1 ? '/' : '';
 
-//localStorage.setItem('token','5853f1432e9ffc32b519a8c3');
+Vue.http.get(API_BASE_URL + '/init?uri=' + encodeURIComponent(currentUri)).then(function (res) {
+    if (res.body.js_config) {
+        //wx.config
+        wx.config(res.body.js_config);
+        /*
+        wx.ready(function(){
+            geo.getLocation(function(ret){
+                var res = ret.body;
+                if (res.status != 0) {
+                    return;
+                }
+                var lng = res.result[0].x;
+                var lat = res.result[0].y;
+                localStorage.setItem('lng', lng);
+                localStorage.setItem('lat', lat);
+            });
+        })
+        */
+    }
+})
 
 //检查是否保存有token
 var token = localStorage.getItem('token');
@@ -36,7 +59,7 @@ var code = getQueryParam('code');
 
 var gotoWechatOauth = function () {
     //获取微信授权地址，跳转微信授权
-    Vue.http.get(API_BASE_URL + '/auth/url').then(function (res) {
+    Vue.http.get(API_BASE_URL + '/auth/url?backurl=' + currentUri).then(function (res) {
         if (res.body.wechatOauthUrl) {
             window.location.href = res.body.wechatOauthUrl;
         }
@@ -69,8 +92,6 @@ if (!token) {
             //500毫秒后跳转到微信授权
             setTimeout(gotoWechatOauth, 500);
             return
-        } else {
-            localStorage.setItem('token', res.body.token)
         }
     }, function (err) {
         //无效删除

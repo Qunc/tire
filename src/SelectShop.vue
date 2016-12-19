@@ -17,7 +17,6 @@
 	</div>
 </template>
 <script>
-
 var geo = require('./geo.js');
 module.exports = {
 	data: function () {
@@ -26,31 +25,18 @@ module.exports = {
         }
     },
 	created: function(){
-		//做一些初始化动作
-		var currentUri = location.href.split('#')[0];
-		currentUri += currentUri.lastIndexOf('/') !== currentUri.length - 1 ? '/' : '';
-
-		this.$http.get(API_BASE_URL + '/init?uri=' + encodeURIComponent(currentUri)).then(function (res) {
-			if (res.body.js_config) {
-				//wx.config
-				wx.config(res.body.js_config);
-				wx.ready(function(){
-					var obj_vue = this;
-					geo.getLocation(function(ret){
-						var res = ret.body;
-						console.log(res.status)
-						if (res.status != 0) {
-							return;
-						}
-						var lng = res.result[0].x;
-						var lat = res.result[0].y;
-						localStorage.setItem('lng', lng);
-						localStorage.setItem('lat', lat);
-						obj_vue.fetchData();
-					});
-				})
+    	var _this = this;
+		geo.getLocation(function(ret){
+			var res = ret.body;
+			if (res.status != 0) {
+				return;
 			}
-		})
+			var lng = res.result[0].x;
+			var lat = res.result[0].y;
+			localStorage.setItem('lng', lng);
+			localStorage.setItem('lat', lat);
+			_this.fetchData();
+		});
 		this.fetchData();
         document.getElementsByTagName("body")[0].setAttribute("style","background-color:#ebebeb");
 		//转菊花
