@@ -15,7 +15,7 @@
 					<span>{{shop.name}}</span>
 				</p>
 				<p class="ShopPhoneNumber">
-					<span>{{shop.contacts_phone || shop.mobile}}</span>
+					<a href="tel:15899877930">{{shop.contacts_phone || shop.mobile}}</a>
 				</p>
 				<p class="ShopContact">
 					<span>联系人：</span>{{shop.contacts}}
